@@ -57,6 +57,6 @@ file in the `lang/results_all` folder. The threshold for displaying a bigram in 
 
 If a particular layout isn't included in the analysis, simply copy the existing layout file and edit it. Don't forget to specify the analysis mode `std` or `ang` in the layout file. Both modes can be specified (separated by a space).
 
-The analyzer only includes English and Russian layouts, but you can add any language for analysis by creating a folder with the name of the language and adding the layout files to it. Then add the language to the list of languages ​​in the `analyze.py` script. You will also need to create a file with the list of bigrams and their frequencies.
+The analyzer only includes English and Russian layouts, but you can add any language for analysis by creating a folder with the name of the language and adding the layout files to it. Then add the language to the list of languages​ in the `analyze.py` script. You will also need to create a file with the list of bigrams and their frequencies.
 
 The analyzer only supports the ANSI keyboard, but it can be used with any keyboard with any number of keys. Simply create a new keyboard folder, number the keys sequentially for each hand, and, based on this numbering, construct matrices of efforts and add them to the corresponding files (`left`, `right`), from where the analyzer reads them. The folder structure should be the same as for `ANSI` folder. Next, copy `analyze.py` to the keyboard folder and run it.
