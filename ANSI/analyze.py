@@ -20,19 +20,23 @@ def caption() -> str:
         caption += f"{effort:<{COLUMN_WIDTH}}"
     return caption
 
-def read_data(file_name: str) -> list[list[str]]:
+def read_data(file_path: Path) -> list[list[str]]:
     data = []
-    with open(file_name, "r", encoding="utf-8") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         for line in file:
             data.append(line.split())
     return data
 
-def print_results_list(lang: str, all_stats: list[Tuple[float, str]]):
+def write_results_list(
+    lang: str, 
+    all_stats: list[Tuple[float, str]],
+    results_path: Path
+    ):
     all_stats.insert(0, (0, "\n" + lang))
     all_stats.insert(1, (0, caption()))
     for line in all_stats:
         print(line[1])
-    with open(f"./{lang}/results", "w", encoding="utf-8") as file:
+    with open(results_path, "w", encoding="utf-8") as file:
         for line in all_stats:
             file.write(line[1] + "\n")
 
@@ -96,7 +100,6 @@ class Layout:
     ) -> Tuple[float, str]:
 
         with open(results_file_path, "w", encoding="utf-8") as results_file:
-
             results_file.write("\n")
             results_file.write(f"{self.name.upper()}({mode})\n")
 
@@ -145,18 +148,19 @@ class Layout:
 
 
 def main():
-    left_std_efforts: list[list[str]] = read_data("left")
-    left_angle_efforts: list[list[str]]= read_data("left_angle")
-    right_efforts: list[list[str]]= read_data("right")
+    project_path = Path(__file__).resolve().parent
+    left_std_efforts: list[list[str]] = read_data(project_path / "left")
+    left_angle_efforts: list[list[str]]= read_data(project_path / "left_angle")
+    right_efforts: list[list[str]]= read_data(project_path / "right")
 
     for lang in LANGUAGES_LIST:
-        bigrams_list: list[list[str]] = read_data(f"./{lang}/bigrams")
-        results_all_dir = f"./{lang}/results_all/"
-        if not os.path.exists(results_all_dir):
-            os.makedirs(results_all_dir, exist_ok=True)
+        bigrams_list: list[list[str]] = read_data(project_path / f"{lang}/bigrams")
+        results_all_path = project_path / f"{lang}/results_all"
+        if not os.path.exists(results_all_path):
+            os.makedirs(results_all_path, exist_ok=True)
 
         results_list: list[Tuple[float, str]] = []
-        for layout_path in Path(f"./{lang}/layouts/").iterdir():
+        for layout_path in (project_path / f"{lang}/layouts").iterdir():
             if not layout_path.is_file():
                 continue
             layout = Layout(layout_path)
@@ -173,7 +177,7 @@ def main():
                 results: Tuple[float, str] = layout.write_results(
                     mode,
                     bigrams_list_analized,
-                    Path(f"{results_all_dir}{layout.name}({mode})"),
+                    results_all_path / f"{layout.name}({mode})"
                 )
                 if len(results_list) == 0:
                     results_list.append(results)
@@ -185,8 +189,12 @@ def main():
                         if i == len(results_list) - 1:
                             results_list.append(results)
                             break
-
-        print_results_list(lang, results_list)
+        results_table_path = project_path / f"{lang}/results"
+        write_results_list(lang, results_list, results_table_path)
+        print("")
+        print(f"See this compare table in file: {results_table_path}")
+        print(f"Full results for layouts in folder: {results_all_path}")
+    print("")
 
 if __name__ == "__main__":
     main()
