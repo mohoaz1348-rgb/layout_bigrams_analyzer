@@ -192,8 +192,8 @@ def main():
         results_table_path = project_path / f"{lang}/results"
         write_results_list(lang, results_list, results_table_path)
         print("")
-        print(f"See this compare table in file: {results_table_path}")
-        print(f"Full results for layouts in folder: {results_all_path}")
+        print(f"See this comparison table in the file: {results_table_path}")
+        print(f"Full results for layouts in the folder: {results_all_path}")
     print("")
 
 if __name__ == "__main__":
