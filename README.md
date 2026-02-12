@@ -1,7 +1,7 @@
 # ABA – All Bigrams Analyzer
 ## Why another analyzer?
-If you look at the results of a keyboard layout bigram analysis in any analyzer and add them together, the sum won't exceed 5%. Where are the results for the other bigrams? Are they really that unimportant?
-These analyzers also do not take into account a person's individual preferences for typing certain key combinations on one hand.
+  If you look at the results of a keyboard layout bigram analysis in any analyzer and add them together, the sum won't exceed 5%. Where are the results for the other bigrams? Are they really that unimportant?
+  These analyzers also do not take into account a person's individual preferences for typing certain key combinations on one hand.
 As a result, I found it difficult to evaluate the usability of any particular layout for myself. I should note that evaluating a layout based solely on bigram analysis is impossible, and my bigram analyzer doesn't claim to be a full-fledged layout analyzer—it's simply an additional utility that fills the gaps in modern analyzers.
 ## Possible algorithm for applying ABA
 When choosing a layout, I proceed as follows: first, I select layouts that meet my requirements for redirects (especially bad ones); at this stage, significant selection occurs. I don't pay attention to the number of rolls, as these can be scissors or other awkward combinations. I simply look at the ratio of inward/outward rolls. There shouldn't be significantly more outward rolls than inward rolls.
