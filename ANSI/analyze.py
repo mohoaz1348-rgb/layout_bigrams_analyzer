@@ -104,14 +104,14 @@ BG_TYPES_LIST = [
 SORT_BY = "Sort By"
 
 SFB_PER_FINGER_LIST = [
-    ("SFB_0", f"^{SFB_PREF}0{SFB_DIST_PTN}$", 1.0, 0.25),
+    ("SFB_0", f"^{SFB_PREF}0{SFB_DIST_PTN}$", 3.0, 0.25),
     ("SFB_1", f"^{SFB_PREF}1{SFB_DIST_PTN}$", 1.0, 1.0),
     ("SFB_2", f"^{SFB_PREF}2{SFB_DIST_PTN}$", 1.0, 1.5),
     ("SFB_3", f"^{SFB_PREF}3{SFB_DIST_PTN}$", 1.0, 2.0),
     ("SFB_6", f"^{SFB_PREF}6{SFB_DIST_PTN}$", 1.0, 2.0),
     ("SFB_7", f"^{SFB_PREF}7{SFB_DIST_PTN}$", 1.0, 1.5),
     ("SFB_8", f"^{SFB_PREF}8{SFB_DIST_PTN}$", 1.0, 1.0),
-    ("SFB_9", f"^{SFB_PREF}9{SFB_DIST_PTN}$", 1.0, 0.25),
+    ("SFB_9", f"^{SFB_PREF}9{SFB_DIST_PTN}$", 3.0, 0.25),
 ]
 
 #COMPARE TABLE OF LAYOUTS:
