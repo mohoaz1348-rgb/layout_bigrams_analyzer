@@ -257,8 +257,6 @@ class Layout:
                     res_dict[lbl] = lst
             else:
                 res_dict[lbl] = lst
-            #res_dict[lbl] = lst
-
         return (stat_list, res_dict)
 
     def append_full_report(
@@ -333,7 +331,7 @@ def read_data(file_path: Path) -> list[list[str]]:
 
 def sort_by_effort(layout_stats: list) -> float:
     order_by = 0.0
-    for i, effort in enumerate(EFFORTS_LIST[:abs(int(EFFORTS_LIST[0][1]))], 1):
+    for i, effort in enumerate(EFFORTS_LIST[:get_efforts_max()], 1):
         order_by +=  effort[2] * layout_stats[i]
     layout_stats.append(order_by)
     return order_by
