@@ -97,7 +97,7 @@ BG_TYPES_LIST = [
     ("LSB(IP)", "^LS$", 1.0, 1.0),                   # LSB Index-Pinky
     ("LSB(P)", f"^lspr$|^lspm$", 2.5, 0.25),          # LSB Pinky-Ring + LSB Pinky-Middle
     ("R(P-M)", "^rpm$", 0.5, 2.0),                   # Rolls Pinky-Middle
-    ("R(R->P)", "^ropr$", 1.0, 0.5),                 # Roll-out Ring->Pinky
+    ("R(R->P)", "^ropr$", 0.5, 0.5),                 # Roll-out Ring->Pinky
     #("FS(ok)", f"^fsg$", 0.0, None),          # Good (Index on buttom row) Full Scissors
     #("WS(ok)", f"^[Ww]sg$", 0.0, None),        # Good Full Scissors - Wide
 ]
