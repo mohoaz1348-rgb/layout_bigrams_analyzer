@@ -65,7 +65,7 @@ See [efforts_readme](./ANSI/efforts_readme)
 
 This is the most labor-intensive part, which can take a full day. But at least you'll know for sure that the analysis results reflect your preferences.
 
-Then, based on these effort matrices, all the bigrams in the language are classified, the total frequency is calculated for each category (`-3`, `-2`, `-1`, `0`, `1`, `2`, `3`), and a final comparison table is created. The results are sorted by the `-3` column, as I believe that the comfort of a layout is primarily determined by the absence of awkward combinations.
+Then, based on these effort matrices, all the bigrams in the language are classified, the total frequency is calculated for each category (`-3`, `-2`, `-1`, `0`, `1`, `2`, `3`), and a final comparison table is created. The results are sorted by the `-3`, `-2`, `-1` column, as I believe that the comfort of a layout is primarily determined by the absence of awkward combinations.
 
 See [results](./ANSI/en/results)  
 Full results for each layout are available [here](./ANSI/en/results_all).
