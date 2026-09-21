@@ -35,7 +35,8 @@ LANGUAGES_LIST = ["en", "ru"]
 
 STD = "std"
 ANG = "ang"
-ANALYZE_MODE = [STD, ANG]
+NOKWTS_ANG = "nok"
+ANALYZE_MODE = [STD, ANG, NOKWTS_ANG]
 
 ALT = "alt"
 NOT_FOUND = "NF"
@@ -425,10 +426,10 @@ def get_efforts_max() -> int:
     val = abs(int(EFFORTS_LIST[0][1]))
     return val
 
-def change_rpm_by(change: int, l, l_t, la, la_t, r, r_t):
+def change_rpm_by(change: int, l, l_t, la, la_t, lna, lna_t, r, r_t):
     msg = "Cannot change efforts for Pinky-Middle Rolls (OUT OF RANGE!)"
     efforts_max: int = get_efforts_max()
-    matrix_list = [(l, l_t), (la, la_t), (r, r_t)]
+    matrix_list = [(l, l_t), (la, la_t), (lna, lna_t),(r, r_t)]
     for matrix, matrix_t in matrix_list: 
         for i, line in enumerate(matrix_t):
             for j, bg_type in enumerate(line):
@@ -450,6 +451,8 @@ def main():
     left_std_types: list[list[str]]= read_data(project_path / "left_types")
     left_angle_efforts: list[list[str]]= read_data(project_path / "left_angle")
     left_angle_types: list[list[str]]= read_data(project_path / "left_angle_types")
+    left_nokwts_angle_efforts: list[list[str]]= read_data(project_path / "left_nokwts_angle")
+    left_nokwts_angle_types: list[list[str]]= read_data(project_path / "left_nokwts_angle_types")
     right_efforts: list[list[str]]= read_data(project_path / "right")
     right_types: list[list[str]]= read_data(project_path / "right_types")
     change_rpm_by(
@@ -458,6 +461,8 @@ def main():
         left_std_types,
         left_angle_efforts,
         left_angle_types,
+        left_nokwts_angle_efforts,
+        left_nokwts_angle_types,
         right_efforts,
         right_types
     )
@@ -490,6 +495,9 @@ def main():
                 if mode == ANG:
                     left_efforts = left_angle_efforts
                     left_types = left_angle_types
+                if mode == NOKWTS_ANG:
+                    left_efforts = left_nokwts_angle_efforts
+                    left_types = left_nokwts_angle_types
 
                 bg_list_classified = layout.classify(
                     bg_list, left_efforts, right_efforts, left_types, right_types

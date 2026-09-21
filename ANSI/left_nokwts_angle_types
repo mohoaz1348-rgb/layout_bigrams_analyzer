@@ -1,0 +1,15 @@
+sf00    1  rpm    1    1 sf01 hspr  rpm    2    1 fspr   ws  Wsg  Wsg   LS
+ropr sf10    2    2  lsr hspr sf11  hsb    3  lsr sf12   fs  wsg  lsr  lsr
+ rpm    2 sf20    2   ls  rpm    1 sf21    3   ls   fs sf22  fsg   ls   ls
+   1    2    2 sf30    1    1    1    1    1    1   ws   fs    1    1    0
+   1  lsr   ls    1 sf30    0  lsr   ls sf31 sf31   ws   fs sf32 sf32 sf32
+sf01 hspr  rpm    1    1 sf00    2  rpm    2    2 hspr  rpm    2    2   LS
+hspr sf11    3    2  lsr ropr sf10    3    3  lsr sf11  hsb    3    3  lsr
+ rpm  hsb sf21    1   ls  rpm    3 sf20    3   ls    0 sf21    3    2   ls
+   2    3    3    1 sf31    2    3    3 sf30 sf31    0    0 sf31 sf31 sf32
+   1  lsr   ls    1 sf31    2  lsr   ls sf31 sf30  lsr   ls sf32 sf31 sf31
+fspr sf12   fs   ws   ws hspr sf11    1    0  lsr sf10    1    1  lsr  lsr
+  ws   fs sf22   fs   fs  rpm    2 sf21    1   ls    1 sf20    1   ls   ls
+ Wsg  wsg  fsg  fsg sf32    2    3    3 sf31 sf32    1    1 sf30 sf31 sf32
+ Wsg  lsr   ls  fsg sf32    2    3    2 sf31 sf31  lsr   ls sf31 sf30 sf31
+  LS  lsr   ls   ls sf32   LS  lsr   ls sf32 sf31  lsr   ls sf32 sf31 sf30

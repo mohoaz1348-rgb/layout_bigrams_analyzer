@@ -88,6 +88,99 @@ ropr - Roll-Out (Pinky-Ring)
 COPY THIS MATRIX of types to the file 'left_angle_types' (without strings and columns numeration)
 
 
+                |--------------------------------------|
+                |      LEFT ARM (Nokwts Angle Mod)     |
+                |--------------------------------------|
+
+          Middle
+          |   Middle
+          |   |
+| 1 | 2 | 3 | 4 | 5 |
+ -----------------
+ | 6 | 7 | 8 | 9 | 10|
+ -----------------
+   | 11| 12| 13| 14| 15|
+     ^   ^   ^
+   Ring  |   Index
+       Middle
+
+
+MATRIX OF EFFORTS
+
+"3" - most convinient combination
+"-3"  - awkward combination
+
+
+**  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+-----------------------------------------------
+01 -3  1 -1  1  1 -3 -3 -2  2  1 -3 -3  1  1 -2
+02 -1 -1  2  2  0 -3 -1 -2  3  0 -2 -3  2  0 -2
+03 -1  2 -1  2  0 -1  1 -1  3 -1 -3 -2  1  0 -2
+04  1  2  2 -1  1  1  1  1  1  1 -2 -3  1  1  0
+05  1  0  0  1 -1  0  0  0 -1 -1 -2 -3 -3 -2 -3
+06 -3  0 -1  1  1 -3  2 -1  2  2 -3 -2  2  2  0
+07 -3 -1  3  2  1 -1 -1  3  3  2 -1 -2  3  3 -2
+08 -2 -2 -1  1  0 -1  3 -1  3  0  0 -1  3  2 -1
+09  2  3  3  1 -1  2  3  3 -1 -1  0  0 -1 -1 -2
+10  1  1 -1  1 -1  2  1  0 -1 -1 -1 -1 -2 -1 -1
+11 -3 -2 -3 -2 -2 -3 -1  1  0 -1 -1  1  1  0 -3
+12 -2 -3 -2 -3 -3 -2  2 -1  1 -2  1 -1  1 -1 -3
+13  1  2  1  1 -3  2  3  3 -1 -2  1  1 -1 -1 -3
+14  1  1  0  1 -2  2  3  2 -1 -1  0 -1 -1 -1 -2
+15 -2 -2 -2  0 -3  0 -1 -1 -2 -1 -3 -3 -3 -2 -2
+
+!!! COPY THIS MATRIX of efforts to the file 'left_nokwts_angle' (without strings and columns numeration)
+
+
+MATRIX OF TYPES
+
+fspr - Full Scissor Pinky/Ring
+hspr - Half-Scissor Pinky/Ring
+
+fsg - Full Scissor (Good: index finger on the bottom row)
+wsg - Wide(full) Scissor (Good)
+Wsg - Widest(full) Scissor (Good)
+
+fs - Full Scissor (Only Bad)
+ws - Wide(full) Scissor (Only Bad) 
+Ws - Widest(full) - Scissor (Only Bad)
+
+hsb - Half Scissor (Bad)
+
+sf00 - Same Finger (Finger #, Distance)
+
+ls - Lateral Stretch
+lsr - Lateral Stretch (Ring)
+LS - Lateral Stretch (Index-Pinky) (5-6u)
+lspr - Lateral Stretch (Pinky-Ring)
+lspm - Lateral Stretch (Pinky-Middle)
+
+rpm - Roll (Pinky-Middle)
+ropr - Roll-Out (Pinky-Ring)
+
+
+**    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
+-----------------------------------------------------------------------------
+01 sf00    1  rpm    1    1 sf01 hspr  rpm    2    1 fspr   ws  Wsg  Wsg   LS
+02 ropr sf10    2    2  lsr hspr sf11  hsb    3  lsr sf12   fs  wsg  lsr  lsr
+03  rpm    2 sf20    2   ls  rpm    1 sf21    3   ls   fs sf22  fsg   ls   ls
+04    1    2    2 sf30    1    1    1    1    1    1   ws   fs    1    1    0
+05    1  lsr   ls    1 sf30    0  lsr   ls sf31 sf31   ws   fs sf32 sf32 sf32
+06 sf01 hspr  rpm    1    1 sf00    2  rpm    2    2 hspr  rpm    2    2   LS
+07 hspr sf11    3    2  lsr ropr sf10    3    3  lsr sf11  hsb    3    3  lsr
+08  rpm  hsb sf21    1   ls  rpm    3 sf20    3   ls    0 sf21    3    2   ls
+09    2    3    3    1 sf31    2    3    3 sf30 sf31    0    0 sf31 sf31 sf32
+10    1  lsr   ls    1 sf31    2  lsr   ls sf31 sf30  lsr   ls sf32 sf31 sf31
+11 fspr sf12   fs   ws   ws hspr sf11    1    0  lsr sf10    1    1  lsr  lsr
+12   ws   fs sf22   fs   fs  rpm    2 sf21    1   ls    1 sf20    1   ls   ls
+13  Wsg  wsg  fsg  fsg sf32    2    3    3 sf31 sf32    1    1 sf30 sf31 sf32
+14  Wsg  lsr   ls  fsg sf32    2    3    2 sf31 sf31  lsr   ls sf31 sf30 sf31
+15   LS  lsr   ls   ls sf32   LS  lsr   ls sf32 sf31  lsr   ls sf32 sf31 sf30
+
+COPY THIS MATRIX of types to the file 'left_nokwts_angle_types' (without strings and columns numeration)
+
+
+
                 |------------------------------|
                 |      LEFT ARM (Std Mod)      |
                 |------------------------------|
