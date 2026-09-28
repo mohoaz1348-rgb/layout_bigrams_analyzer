@@ -36,7 +36,8 @@ LANGUAGES_LIST = ["en", "ru"]
 STD = "std"
 ANG = "ang"
 NOKWTS_ANG = "nok"
-ANALYZE_MODE = [STD, ANG, NOKWTS_ANG]
+GRAWERTY = "gra"
+ANALYZE_MODE = [STD, ANG, NOKWTS_ANG, GRAWERTY]
 
 ALT = "alt"
 NOT_FOUND = "NF"
@@ -453,8 +454,11 @@ def main():
     left_angle_types: list[list[str]]= read_data(project_path / "left_angle_types")
     left_nokwts_angle_efforts: list[list[str]]= read_data(project_path / "left_nokwts_angle")
     left_nokwts_angle_types: list[list[str]]= read_data(project_path / "left_nokwts_angle_types")
-    right_efforts: list[list[str]]= read_data(project_path / "right")
-    right_types: list[list[str]]= read_data(project_path / "right_types")
+    right_std_efforts: list[list[str]]= read_data(project_path / "right")
+    right_grawerty_efforts: list[list[str]]= read_data(project_path / "right_grawerty")
+    right_std_types: list[list[str]]= read_data(project_path / "right_types")
+    right_grawerty_types: list[list[str]]= read_data(project_path / "right_grawerty_types")
+
     change_rpm_by(
         RPM_DIFF,
         left_std_efforts,
@@ -463,8 +467,8 @@ def main():
         left_angle_types,
         left_nokwts_angle_efforts,
         left_nokwts_angle_types,
-        right_efforts,
-        right_types
+        right_std_efforts,
+        right_std_types
     )
     #matrix_to_file(project_path / "left_trans", left_std_efforts)
     #matrix_to_file(project_path / "left_angle_trans", left_angle_efforts)
@@ -492,12 +496,19 @@ def main():
             for mode in layout.mode_list:
                 left_efforts = left_std_efforts
                 left_types = left_std_types
+                right_efforts = right_std_efforts
+                right_types = right_std_types
                 if mode == ANG:
                     left_efforts = left_angle_efforts
                     left_types = left_angle_types
                 if mode == NOKWTS_ANG:
                     left_efforts = left_nokwts_angle_efforts
                     left_types = left_nokwts_angle_types
+                if mode == GRAWERTY:
+                    left_efforts = left_angle_efforts
+                    left_types = left_angle_types
+                    right_efforts = right_grawerty_efforts
+                    right_types = right_grawerty_types
 
                 bg_list_classified = layout.classify(
                     bg_list, left_efforts, right_efforts, left_types, right_types

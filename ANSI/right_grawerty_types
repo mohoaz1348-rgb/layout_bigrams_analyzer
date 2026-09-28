@@ -1,0 +1,18 @@
+sf60 sf61   ls  lsr    1   LS   LS sf61 sf62   ls  lsr    0   LS sf62 sf63   fs   ws   Ws
+sf61 sf60    2    2    1    0   LS sf61 sf61    1    1    1    0  fsg  fsg   fs   ws   Ws
+  ls    2 sf70    2  rpm lspm lspm   ls    3 sf71    2  rpm lspm   ls  fsg sf72   fs   ws
+ lsr    2    2 sf80 ropr lspr lspr  lsr    3    1 sf81 hspr lspr  wsg  wsg   fs sf82 fspr
+   1    1  rpm    1 sf90 sf91 sf92    1    2  rpm hspr sf91 sf92  Wsg  Wsg   ws fspr sf92
+  LS    0 lspm lspr sf91 sf90 sf91   LS    1 lspm lspr sf91 sf91   LS  Wsg   ws fspr sf92
+  LS   LS lspm lspr sf92 sf91 sf90   LS   LS lspm lspr sf92 sf91   LS   LS   ws fspr sf92
+sf61 sf61   ls  lsr    1   LS   LS sf60 sf61   ls  lsr    1   LS sf61 sf62   ls  lsr    0
+sf62 sf61    3    3    2    1   LS sf61 sf60    3    3    2    1 sf61 sf61    0    0    0
+  ls    1 sf71    2  rpm lspm lspm   ls    3 sf70    3  rpm lspm    2    3 sf71    0  rpm
+ lsr    2    3 sf81 hspr lspr lspr  lsr    3    3 sf80 ropr lspr    3    3  hsb sf81 hspr
+   0    1  rpm hspr sf91 sf91 sf92    2    2  rpm    2 sf90 sf91    2    2  rpm hspr sf91
+  LS    0 lspm lspr sf92 sf91 sf91   LS    1 lspm lspr sf91 sf90   LS    1 lspm lspr sf91
+sf62  fsg   ls  wsg  Wsg   LS   LS sf61 sf61    2    3    2   LS sf60 sf61   ls  lsr    1
+sf63  fsg  fsg  wsg  Wsg  Wsg   LS sf62 sf61    3    3    2    1 sf61 sf60    1    1    1
+  fs   fs sf72   fs   ws   ws   ws   ls    1 sf71    2  rpm lspm   ls    1 sf70    1  rpm
+  ws   ws   fs sf82   fs fspr fspr  lsr    0    1 sf81 hspr lspr  lsr    1    1 sf80 ropr
+  Ws   Ws   ws fspr sf92 sf92 sf92    0    0  rpm hspr sf91 sf91    1    1  rpm    1 sf90
