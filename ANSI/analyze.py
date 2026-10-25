@@ -32,12 +32,14 @@ ropr - Roll-Out (Pinky-Ring)
 """
 RPM_DIFF: int = 0
 LANGUAGES_LIST = ["en", "ru"]
-
+BS = ["bigrams"]
+#BS = ["bigrams", "skipgrams"]
 STD = "std"
 ANG = "ang"
 NOKWTS_ANG = "nok"
 GRAWERTY = "gra"
-ANALYZE_MODE = [STD, ANG, NOKWTS_ANG, GRAWERTY]
+QWERTY = "qwe"
+ANALYZE_MODE = [STD, ANG, NOKWTS_ANG, GRAWERTY, QWERTY]
 
 ALT = "alt"
 NOT_FOUND = "NF"
@@ -100,8 +102,8 @@ BG_TYPES_LIST = [
     ("LSB(P)", f"^lspr$|^lspm$", 2.5, 0.25),          # LSB Pinky-Ring + LSB Pinky-Middle
     ("R(P-M)", "^rpm$", 0.5, 2.0),                   # Rolls Pinky-Middle
     ("R(R->P)", "^ropr$", 0.5, 0.5),                 # Roll-out Ring->Pinky
-    #("FS(ok)", f"^fsg$", 0.0, None),          # Good (Index on buttom row) Full Scissors
-    #("WS(ok)", f"^[Ww]sg$", 0.0, None),        # Good Full Scissors - Wide
+    #("FS(ok)", f"^fsg$", 0.2, None),          # Good (Index on buttom row) Full Scissors
+    #("WS(ok)", f"^[Ww]sg$", 0.1, None),        # Good Full Scissors - Wide
 ]
 SORT_BY = "Sort By"
 
@@ -448,16 +450,17 @@ def matrix_to_file(f_path: Path, matrix: list[list]):
 
 def main():
     project_path = Path(__file__).resolve().parent
-    left_std_efforts: list[list[str]] = read_data(project_path / "left")
-    left_std_types: list[list[str]]= read_data(project_path / "left_types")
-    left_angle_efforts: list[list[str]]= read_data(project_path / "left_angle")
-    left_angle_types: list[list[str]]= read_data(project_path / "left_angle_types")
-    left_nokwts_angle_efforts: list[list[str]]= read_data(project_path / "left_nokwts_angle")
-    left_nokwts_angle_types: list[list[str]]= read_data(project_path / "left_nokwts_angle_types")
-    right_std_efforts: list[list[str]]= read_data(project_path / "right")
-    right_grawerty_efforts: list[list[str]]= read_data(project_path / "right_grawerty")
-    right_std_types: list[list[str]]= read_data(project_path / "right_types")
-    right_grawerty_types: list[list[str]]= read_data(project_path / "right_grawerty_types")
+    matrix_path = project_path / "matrix"
+    left_std_efforts: list[list[str]] = read_data(matrix_path / "left")
+    left_std_types: list[list[str]]= read_data(matrix_path / "left_types")
+    left_angle_efforts: list[list[str]]= read_data(matrix_path / "left_angle")
+    left_angle_types: list[list[str]]= read_data(matrix_path / "left_angle_types")
+    left_nokwts_angle_efforts: list[list[str]]= read_data(matrix_path / "left_nokwts_angle")
+    left_nokwts_angle_types: list[list[str]]= read_data(matrix_path / "left_nokwts_angle_types")
+    right_std_efforts: list[list[str]]= read_data(matrix_path / "right")
+    right_grawerty_efforts: list[list[str]]= read_data(matrix_path / "right_grawerty")
+    right_std_types: list[list[str]]= read_data(matrix_path / "right_types")
+    right_grawerty_types: list[list[str]]= read_data(matrix_path / "right_grawerty_types")
 
     change_rpm_by(
         RPM_DIFF,
@@ -478,77 +481,83 @@ def main():
     res_by_type: Tuple[list, dict]
 
     for lang in LANGUAGES_LIST:
-        bg_list: list[list[str]] = read_data(project_path / f"{lang}/bigrams")
-        results_all_path = project_path / f"{lang}/results_all"
-        if not os.path.exists(results_all_path):
-            os.makedirs(results_all_path, exist_ok=True)
+        for t in BS:
+            bg_list: list[list[str]] = read_data(project_path / f"{lang}/{t}")
+            results_all_path = project_path / f"{lang}/results_all"
+            if not os.path.exists(results_all_path):
+                os.makedirs(results_all_path, exist_ok=True)
 
-        res_by_effort_tbl: list[list] = []
-        res_by_type_tbl: list[list] = []
-        res_by_hand_tbl: list[list] = []
-        res_by_finger_tbl: list[list] = []
-        for layout_path in (project_path / f"{lang}/layouts").iterdir():
-            if not layout_path.is_file():
-                continue
-            layout = Layout(layout_path)
-            if not layout.is_valid:
-                continue
-            for mode in layout.mode_list:
-                left_efforts = left_std_efforts
-                left_types = left_std_types
-                right_efforts = right_std_efforts
-                right_types = right_std_types
-                if mode == ANG:
-                    left_efforts = left_angle_efforts
-                    left_types = left_angle_types
-                if mode == NOKWTS_ANG:
-                    left_efforts = left_nokwts_angle_efforts
-                    left_types = left_nokwts_angle_types
-                if mode == GRAWERTY:
-                    left_efforts = left_angle_efforts
-                    left_types = left_angle_types
-                    right_efforts = right_grawerty_efforts
-                    right_types = right_grawerty_types
+            res_by_effort_tbl: list[list] = []
+            res_by_type_tbl: list[list] = []
+            res_by_hand_tbl: list[list] = []
+            res_by_finger_tbl: list[list] = []
+            for layout_path in (project_path / f"{lang}/layouts").iterdir():
+                if not layout_path.is_file():
+                    continue
+                layout = Layout(layout_path)
+                if not layout.is_valid:
+                    continue
+                for mode in layout.mode_list:
+                    left_efforts = left_std_efforts
+                    left_types = left_std_types
+                    right_efforts = right_std_efforts
+                    right_types = right_std_types
+                    if mode == ANG:
+                        left_efforts = left_angle_efforts
+                        left_types = left_angle_types
+                    if mode == NOKWTS_ANG:
+                        left_efforts = left_nokwts_angle_efforts
+                        left_types = left_nokwts_angle_types
+                    if mode == GRAWERTY:
+                        left_efforts = left_angle_efforts
+                        left_types = left_angle_types
+                        right_efforts = right_grawerty_efforts
+                        right_types = right_grawerty_types
+                    if mode == QWERTY:
+                        left_efforts = left_nokwts_angle_efforts
+                        left_types = left_nokwts_angle_types
+                        right_efforts = right_grawerty_efforts
+                        right_types = right_grawerty_types
 
-                bg_list_classified = layout.classify(
-                    bg_list, left_efforts, right_efforts, left_types, right_types
-                )
-                res_by_effort = layout.get_results_by(mode, bg_list_classified, EFFORTS_LIST)
-                res_by_effort_tbl.append(res_by_effort[0])
+                    bg_list_classified = layout.classify(
+                        bg_list, left_efforts, right_efforts, left_types, right_types
+                    )
+                    res_by_effort = layout.get_results_by(mode, bg_list_classified, EFFORTS_LIST)
+                    res_by_effort_tbl.append(res_by_effort[0])
 
-                res_by_type = layout.get_results_by(mode, bg_list_classified, BG_TYPES_LIST)
-                res_by_type_tbl.append(res_by_type[0])
+                    res_by_type = layout.get_results_by(mode, bg_list_classified, BG_TYPES_LIST)
+                    res_by_type_tbl.append(res_by_type[0])
 
-                res_by_hand = layout.get_results_by(mode, bg_list_classified, HAND_LIST)
-                res_by_hand_tbl.append(res_by_hand[0])
+                    res_by_hand = layout.get_results_by(mode, bg_list_classified, HAND_LIST)
+                    res_by_hand_tbl.append(res_by_hand[0])
 
-                res_by_finger = layout.get_results_by(mode, bg_list_classified, SFB_PER_FINGER_LIST)
-                res_by_finger_tbl.append(res_by_finger[0])
-                
-                f_path = results_all_path / f"{layout.name}({mode})"
-                layout.append_full_report(f_path, "w", res_by_finger, SFB_PER_FINGER_LIST, full=False)
-                layout.append_full_report(f_path, "a", res_by_type, BG_TYPES_LIST, full=False)
-                layout.append_full_report(f_path, "a", res_by_effort, EFFORTS_LIST, full=False)
-                layout.append_full_report(f_path, "a", res_by_hand, HAND_LIST, full=False)
-                layout.append_full_report(f_path, "a", res_by_finger, SFB_PER_FINGER_LIST)
-                layout.append_full_report(f_path, "a", res_by_type, BG_TYPES_LIST)
-                layout.append_full_report(f_path, "a", res_by_effort, EFFORTS_LIST)
-                layout.append_full_report(f_path, "a", res_by_hand, HAND_LIST)
+                    res_by_finger = layout.get_results_by(mode, bg_list_classified, SFB_PER_FINGER_LIST)
+                    res_by_finger_tbl.append(res_by_finger[0])
+                    
+                    f_path = results_all_path / f"{layout.name}({mode})"
+                    layout.append_full_report(f_path, "w", res_by_finger, SFB_PER_FINGER_LIST, full=False)
+                    layout.append_full_report(f_path, "a", res_by_type, BG_TYPES_LIST, full=False)
+                    layout.append_full_report(f_path, "a", res_by_effort, EFFORTS_LIST, full=False)
+                    layout.append_full_report(f_path, "a", res_by_hand, HAND_LIST, full=False)
+                    layout.append_full_report(f_path, "a", res_by_finger, SFB_PER_FINGER_LIST)
+                    layout.append_full_report(f_path, "a", res_by_type, BG_TYPES_LIST)
+                    layout.append_full_report(f_path, "a", res_by_effort, EFFORTS_LIST)
+                    layout.append_full_report(f_path, "a", res_by_hand, HAND_LIST)
 
-        f_path = project_path / f"{lang}/results"
-        res_by_effort_tbl.sort(key=sort_by_effort)
-        res_by_type_tbl.sort(key=sort_by_type)
-        #res_by_hand_tbl.sort(key=sort_by_alt, reverse=True)
-        res_by_hand_tbl.sort(key=sort_by_one_hand_usage)
-        res_by_finger_tbl.sort(key=sort_by_sfb)
-        data = [
-            (BG_TYPES_LIST, res_by_type_tbl),
-            (EFFORTS_LIST, res_by_effort_tbl),
-            (HAND_LIST, res_by_hand_tbl),
-            (SFB_PER_FINGER_LIST, res_by_finger_tbl),
-        ]
-        write_compare_table(lang, f_path, data)
-        print(f"Full results for layouts in the folder: {results_all_path}")
+            f_path = project_path / f"{lang}/results"
+            res_by_effort_tbl.sort(key=sort_by_effort)
+            res_by_type_tbl.sort(key=sort_by_type)
+            #res_by_hand_tbl.sort(key=sort_by_alt, reverse=True)
+            res_by_hand_tbl.sort(key=sort_by_one_hand_usage)
+            res_by_finger_tbl.sort(key=sort_by_sfb)
+            data = [
+                (BG_TYPES_LIST, res_by_type_tbl),
+                (EFFORTS_LIST, res_by_effort_tbl),
+                (HAND_LIST, res_by_hand_tbl),
+                (SFB_PER_FINGER_LIST, res_by_finger_tbl),
+            ]
+            write_compare_table(lang, f_path, data)
+            print(f"Full results for layouts in the folder: {results_all_path}")
         
     print("")
 
