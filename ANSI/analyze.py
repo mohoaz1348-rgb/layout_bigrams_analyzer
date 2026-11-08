@@ -43,6 +43,7 @@ ANALYZE_MODE = [STD, ANG, NOKWTS_ANG, GRAWERTY, QWERTY]
 
 ALT = "alt"
 NOT_FOUND = "NF"
+"""
 EFFORTS_LIST = [
     ("-3", "-3", 4.0, 0.9),
     ("-2", "-2", 2.0, 1.5),
@@ -50,6 +51,24 @@ EFFORTS_LIST = [
     ("0", "0", 0.0, None),
     ("1", "1", 0.0, None),
     ("2", "2", 0.0, None),
+    ("3", "3", 0.0, None),
+    (ALT, ALT, 0.0, None),
+    (NOT_FOUND, NOT_FOUND, 0.0, None)
+]
+"""
+EFFORTS_LIST = [
+    ("-3", "-3", 4.0, 0.9),
+    ("-2.5", "-2.5", 3.0, 0.9),
+    ("-2", "-2", 2.0, 1.5),
+    ("-1.5", "-1.5", 1.5, 1.5),
+    ("-1", "-1", 1.0, 7.0),
+    ("-0.5", "-0.5", 0.5, 7.0),
+    ("0", "0", 0.0, None),
+    ("0.5", "0.5", 0.0, None),
+    ("1", "1", 0.0, None),
+    ("1.5", "1.5", 0.0, None),
+    ("2", "2", 0.0, None),
+    ("2.5", "2.5", 0.0, None),
     ("3", "3", 0.0, None),
     (ALT, ALT, 0.0, None),
     (NOT_FOUND, NOT_FOUND, 0.0, None)
@@ -335,7 +354,7 @@ def read_data(file_path: Path) -> list[list[str]]:
 
 def sort_by_effort(layout_stats: list) -> float:
     order_by = 0.0
-    for i, effort in enumerate(EFFORTS_LIST[:get_efforts_max()], 1):
+    for i, effort in enumerate(EFFORTS_LIST[:get_efforts_max()*2], 1):
         order_by +=  effort[2] * layout_stats[i]
     layout_stats.append(order_by)
     return order_by
@@ -350,7 +369,7 @@ def sort_by_type(layout_stats: list) -> float:
 def sort_by_alt(layout_stats: list) -> float:
     sort_by = 0.0
     alt = layout_stats[3]
-    sort_by = alt * HAND_LIST[2]*[2]
+    sort_by = alt * HAND_LIST[2][2]
     layout_stats.append(sort_by)
     return sort_by
 
@@ -446,6 +465,12 @@ def matrix_to_file(f_path: Path, matrix: list[list]):
     with open(f_path, "w", encoding="utf-8") as file:
         for line in matrix:
             file.write(" ".join(f"{item:>2}" for item in line) + "\n")
+
+def transform_matrix(matrix_for_trans: list[list], transforma: list[list]):
+    for i, line in enumerate(transforma):
+        for j, item in enumerate(line):
+            if matrix_for_trans[i][j] == "~":
+                matrix_for_trans[i][j] = item
                     
 
 def main():
@@ -457,11 +482,20 @@ def main():
     left_angle_types: list[list[str]]= read_data(matrix_path / "left_angle_types")
     left_nokwts_angle_efforts: list[list[str]]= read_data(matrix_path / "left_nokwts_angle")
     left_nokwts_angle_types: list[list[str]]= read_data(matrix_path / "left_nokwts_angle_types")
+
     right_std_efforts: list[list[str]]= read_data(matrix_path / "right")
     right_grawerty_efforts: list[list[str]]= read_data(matrix_path / "right_grawerty")
     right_std_types: list[list[str]]= read_data(matrix_path / "right_types")
     right_grawerty_types: list[list[str]]= read_data(matrix_path / "right_grawerty_types")
 
+    transform_matrix(left_std_efforts, left_angle_efforts)
+    transform_matrix(left_std_types, left_angle_types)
+    transform_matrix(left_nokwts_angle_efforts, left_angle_efforts)
+    transform_matrix(left_nokwts_angle_types, left_angle_types)
+    transform_matrix(right_grawerty_efforts, right_std_efforts)
+    transform_matrix(right_grawerty_types, right_std_types)
+
+    """
     change_rpm_by(
         RPM_DIFF,
         left_std_efforts,
@@ -473,6 +507,7 @@ def main():
         right_std_efforts,
         right_std_types
     )
+    """
     #matrix_to_file(project_path / "left_trans", left_std_efforts)
     #matrix_to_file(project_path / "left_angle_trans", left_angle_efforts)
     #matrix_to_file(project_path / "right_trans", right_efforts)

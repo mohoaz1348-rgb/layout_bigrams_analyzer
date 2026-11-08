@@ -1,15 +1,15 @@
-sf00    1  rpm    1    1 sf01 hspr  rpm    2    1 sf02 fspr   ws  Wsg   LS
-ropr sf10    2    2  lsr hspr sf11  hsb    3  lsr fspr sf12   fs  lsr  lsr
- rpm    2 sf20    2   ls  rpm    1 sf21    3   ls   ws   fs sf22   ls   ls
-   1    2    2 sf30 sf31    1    1    1 sf31 sf32   Ws   ws   fs sf32 sf33
-   1  lsr   ls sf31 sf30    0  lsr   ls sf31 sf31   Ws   ws   fs sf32 sf32
-sf01 hspr  rpm    1    1 sf00    2  rpm    2    2 sf01 hspr  rpm    2   LS
-hspr sf11    3    2  lsr ropr sf10    3    3  lsr hspr sf11  hsb    3  lsr
- rpm  hsb sf21    1   ls  rpm    3 sf20    3   ls  rpm  hsb sf21    2   ls
-   2    3    3 sf31 sf31    2    3    3 sf30 sf31    0    0  hsb sf31 sf32
-   1  lsr   ls sf32 sf31    2  lsr   ls sf31 sf30    0    0    0 sf31 sf31
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~ sf02 fspr   ws    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~ fspr sf12   fs    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~   ws   fs sf22    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~   Ws   ws   fs    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~   Ws   ws   fs    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~ sf01 hspr  rpm    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~ hspr sf11  hsb    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~  rpm  hsb sf21    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~    0    0  hsb    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~    0    0    0    ~    ~
 sf02 fspr   ws   Ws   Ws sf01 hspr  rpm    0    0 sf00    1  rpm    1    0
 fspr sf12   fs   ws   ws hspr sf11  hsb    0    0 ropr sf10    1    1  lsr
   ws   fs sf22   fs   fs  rpm  hsb sf21  hsb    0  rpm    1 sf20    1   ls
- Wsg  lsr   ls sf32 sf32    2    3    2 sf31 sf31    1    1    1 sf30 sf31
-  LS  lsr   ls sf33 sf32   LS  lsr   ls sf32 sf31    0  lsr   ls sf31 sf30
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~    1    1    1    ~    ~
+   ~    ~    ~    ~    ~    ~    ~    ~    ~    ~    0  lsr   ls    ~    ~
