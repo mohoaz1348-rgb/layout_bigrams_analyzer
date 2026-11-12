@@ -82,7 +82,7 @@ The mode in which the layout was analyzed is indicated in parentheses after the 
 - sfb(1u)(index, middle, ring) - `-1`
 - sfb(2u)(pinky) - `-3`
 - sfb(2u)(index, middle, ring) - `-2`
-- **rolls(pinky, middle) - `-1`, `-2`**
+- **rolls(pinky, middle) - `-0.5`, `-1.5`**
 - lsb - `0`, `-1`
 
 I don't demonize SFB (except for pinkies) and I don't think they are the most awkward combinations.
